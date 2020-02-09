@@ -42,6 +42,11 @@ class Controller(object):
             return 0.,0.,0.
         
         current_vel = self.vel_lpf.filt(current_vel)
+        rospy.logwarn("Angular vel: {0}".format(angular_vel))
+        rospy.logwarn("Target velocity: {0}".format(linear_vel))
+        rospy.logwarn("Current velocity: {0}".format(current_vel))
+        rospy.logwarn("Filtered velocity: {0}".format(self.vel_lpf.get()))
+
         steering = self.yaw_controller.get_steering(linear_vel,angular_vel,current_vel)
 
         vel_error = linear_vel - current_vel
@@ -62,7 +67,7 @@ class Controller(object):
             decel = max(vel_error, self.decel_limit)
             brake = abs(decel)*self.vehicle_mass*self.wheel_radius # Torque N*m
         #debug
-        return 2.0,0.0,0.0
+        #return 2.0,0.0,0.0
         return throttle, brake, steering
 
 
