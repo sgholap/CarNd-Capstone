@@ -121,6 +121,8 @@ class WaypointUpdater(object):
             p.pose = wp.pose
 
             stop_idx = max(self.stopline_wp_idx - closest_idx - 2, 0)
+            rospy.logwarn("self.stopline_wp_idx: {0}".format(self.stopline_wp_idx))
+            rospy.logwarn("closest_idx: {0}".format(closest_idx))
             rospy.logwarn("i: {0}".format(i))
             rospy.logwarn("stop_idx: {0}".format(stop_idx))
             #rospy.logwarn("waypoints: {0}".format(waypoints))
