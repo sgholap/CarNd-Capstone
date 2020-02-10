@@ -110,6 +110,8 @@ class WaypointUpdater(object):
         if (self.stopline_wp_idx == -1) or (self.stopline_wp_idx >= farthest_idx):
             lane.waypoints = base_waypoints
         else:
+            rospy.logwarn("self.stopline_wp_idx: {0}".format(self.stopline_wp_idx))
+            rospy.logwarn("farthest_idx: {0}".format(farthest_idx))
             lane.waypoints = self.decelerate_waypoints(base_waypoints, closest_idx)
         
         return lane
@@ -121,10 +123,10 @@ class WaypointUpdater(object):
             p.pose = wp.pose
 
             stop_idx = max(self.stopline_wp_idx - closest_idx - 2, 0)
-            rospy.logwarn("self.stopline_wp_idx: {0}".format(self.stopline_wp_idx))
-            rospy.logwarn("closest_idx: {0}".format(closest_idx))
-            rospy.logwarn("i: {0}".format(i))
-            rospy.logwarn("stop_idx: {0}".format(stop_idx))
+            #rospy.logwarn("self.stopline_wp_idx: {0}".format(self.stopline_wp_idx))
+            #rospy.logwarn("closest_idx: {0}".format(closest_idx))
+            #rospy.logwarn("i: {0}".format(i))
+            #rospy.logwarn("stop_idx: {0}".format(stop_idx))
             #rospy.logwarn("waypoints: {0}".format(waypoints))
             dist = self.distance(waypoints, i, stop_idx)
             vel = math.sqrt(2 * MAX_DECEL * dist)
