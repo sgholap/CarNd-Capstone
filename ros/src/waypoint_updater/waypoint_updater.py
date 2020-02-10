@@ -164,10 +164,10 @@ class WaypointUpdater(object):
         dist = 0
         dl = lambda a, b: math.sqrt((a.x-b.x)**2 + (a.y-b.y)**2  + (a.z-b.z)**2)
         for i in range(wp1, wp2+1):
-            rospy.logwarn("wp1: {0}".format(wp1))
-            rospy.logwarn("i: {0}".format(i))
-            rospy.logwarn("waypoints[wp1].pose.pose.position: {0}".format(waypoints[wp1].pose.pose.position))
-            rospy.logwarn("waypoints[i].pose.pose.position: {0}".format(waypoints[i].pose.pose.position))
+            #rospy.logwarn("wp1: {0}".format(wp1))
+            #rospy.logwarn("i: {0}".format(i))
+            #rospy.logwarn("waypoints[wp1].pose.pose.position: {0}".format(waypoints[wp1].pose.pose.position))
+            #rospy.logwarn("waypoints[i].pose.pose.position: {0}".format(waypoints[i].pose.pose.position))
 
             dist += dl(waypoints[wp1].pose.pose.position, waypoints[i].pose.pose.position)
             wp1 = i
