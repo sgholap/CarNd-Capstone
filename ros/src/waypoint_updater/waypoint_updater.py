@@ -49,6 +49,7 @@ class WaypointUpdater(object):
         self.base_waypoints = None
         self.waypoints_2d = None
         self.waypoint_tree = None
+        self.curr_closest_idx = -1
 
         self.loop()
     # waypoint updater partial implementation
@@ -72,6 +73,7 @@ class WaypointUpdater(object):
         x = self.pose.pose.position.x
         y = self.pose.pose.position.y
         closest_idx = self.waypoint_tree.query([x,y],1)[1]
+        closest_idx = max(closest_idx, self.curr_closest_idx)
 
         # Check if closest is ahead or behind vehicle
         closest_coord = self.waypoints_2d[closest_idx]
@@ -86,7 +88,7 @@ class WaypointUpdater(object):
 
         if (val > 0):
             closest_idx = (closest_idx + 1)%len(self.waypoints_2d)
-
+        self.curr_closest_idx = closest_idx
         return closest_idx
 
     # waypoint updater (partial)
@@ -104,6 +106,7 @@ class WaypointUpdater(object):
         lane = Lane()
 
         closest_idx = self.get_closest_waypoint_idx()
+        # rospy.loginfo("closest idx: {}".format(closest_idx))
         farthest_idx = closest_idx + LOOKAHEAD_WPS
         base_waypoints = self.base_lane.waypoints[closest_idx:farthest_idx]
 
