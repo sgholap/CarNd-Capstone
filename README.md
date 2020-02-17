@@ -9,7 +9,7 @@ Holger Wienecke
 
 ## System / Code Structure
 
-
+![System Overview](imgs/final-project-ros-graph-v2.png "System Overview")
 
 ## Usage
 
