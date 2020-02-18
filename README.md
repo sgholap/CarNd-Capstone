@@ -2,9 +2,9 @@
 
 Team Members:
 * Igor Aranovsky (igor.aranovsky@accenture.com)
-* Ryan Kopec (update e-mail)
-* Zhenhao Xu (update e-mail)
-* Sandeep (update e-mail)
+* Ryan Kopec (yankopec91@gmail.com)
+* Zhenhao Xu (xuzhenghao0502@163.com)
+* Sandeep Gholap (frnd.sandeep@gmail.com)
 * Holger Wienecke ( holger.wienecke@accenture.com)
 
 ## System / Code Structure
