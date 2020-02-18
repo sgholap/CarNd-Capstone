@@ -1,11 +1,11 @@
 # Udacity Self Driving Car ND Capstone Project
 
 Team Members:
-* Igor Aranovsky (igor.aranovsky@accenture.com)
-* Ryan Kopec (yankopec91@gmail.com)
-* Zhenhao Xu (xuzhenghao0502@163.com)
-* Sandeep Gholap (frnd.sandeep@gmail.com)
-* Holger Wienecke ( holger.wienecke@accenture.com)
+* Igor Aranovsky ( igor.aranovsky@accenture.com )
+* Ryan Kopec ( yankopec91@gmail.com ) 
+* Zhenhao Xu ( xuzhenghao0502@163.com )
+* Sandeep Gholap ( frnd.sandeep@gmail.com )
+* Holger Wienecke ( holger.wienecke@accenture.com )
 
 ## System / Code Structure
 
@@ -71,11 +71,29 @@ roslaunch launch/site.launch
 
 ## Implementation
 
+
+
 ### Waypoint Updater
+
+#### Add Code Ref here
+#### Add Comments here
 
 ### Drive By Wire (DBW)
 
+#### Add Code Ref here
+#### Add Comments here
+
+
 ### Traffic Light (TL) Detection Node
+
+#### Add Code Ref here
+#### Add Comments here
+
+
+## Simulator Run
+
+### Add Link to Youtube here
+
 
 
 # ORIGINAL TEXT - Remove after cleanup
