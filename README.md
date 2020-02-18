@@ -1,11 +1,11 @@
 # Udacity Self Driving Car ND Capstone Project
 
 Team Members:
-Igor Aranovsky
-Ryan Kopec
-Zhenhao Xu
-Sandeep
-Holger Wienecke
+* Igor Aranovsky (igor.aranovsky@accenture.com)
+* Ryan Kopec (update e-mail)
+* Zhenhao Xu (update e-mail)
+* Sandeep (update e-mail)
+* Holger Wienecke ( holger.wienecke@accenture.com)
 
 ## System / Code Structure
 
@@ -32,7 +32,7 @@ pip install -r requirements.txt --no-cache
 
 ### Build the Software
 
-1. Make and run styx
+1. Use the catkin_make command to build the Catkin Workspace
 ```bash
 cd ros
 catkin_make
@@ -69,6 +69,13 @@ roslaunch launch/site.launch
 
 
 
+## Implementation
+
+### Waypoint Updater
+
+### Drive By Wire (DBW)
+
+### Traffic Light (TL) Detection Node
 
 
 # ORIGINAL TEXT - Remove after cleanup
