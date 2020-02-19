@@ -86,7 +86,12 @@ roslaunch launch/site.launch
 
 ### Traffic Light (TL) Detection Node
 
-#### Add Code Ref here
+#### Implementation
+Keras is used to implement the classifier.
+The Model has been pretrained with data taken from the simulator and has been implemented as follows:
+
+![KERAS Model](imgs/KERAS-Model.PNG "KERAS Model")
+
 #### Add Comments here
 
 
