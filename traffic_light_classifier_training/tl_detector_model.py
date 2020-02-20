@@ -11,10 +11,14 @@ from keras.optimizers import Adam
 from keras.utils.np_utils import to_categorical
 from keras import losses, optimizers, regularizers
 
-NO_LIGHT_DATA_PATH = '/home/workspace/teamwork/dataset/simulator_0220_3/no_light/'
-RED_LIGHT_DATA_PATH = '/home/workspace/teamwork/dataset/simulator_0220_3/has_light/red/'
-YELLOW_LIGHT_DATA_PATH = '/home/workspace/teamwork/dataset/simulator_0220_3/has_light/yellow/'
-GREEN_LIGHT_DATA_PATH = '/home/workspace/teamwork/dataset/simulator_0220_3/has_light/green/'
+from sklearn.utils import shuffle
+import sklearn
+from sklearn.model_selection import train_test_split
+
+NO_LIGHT_DATA_PATH = '/share/simulator_0220_3/no_light/'
+RED_LIGHT_DATA_PATH = '/share/simulator_0220_3/has_light/red/'
+YELLOW_LIGHT_DATA_PATH = '/share/simulator_0220_3/has_light/yellow/'
+GREEN_LIGHT_DATA_PATH = '/share/simulator_0220_3/has_light/green/'
 
 
 def import_data_set():
@@ -51,9 +55,20 @@ def import_data_set():
 def generate_training_validation_data(dataset):
     X_data = []
     y_data = []
+
     for data in dataset:
         X_data.append(data[0])
         y_data.append(data[1])
+        # flip the last image and add it with the label to the list
+        X_data.append(cv2.flip(data[0],1))
+        y_data.append(data[1]) 
+    # Shuffle the list
+    sklearn.utils.shuffle(X_data, y_data)
+    print("Data configured")
+    print("--------------------------------------------")
+    print("Images                 =", len(dataset))
+    print("Augmented Images       =", len(X_data))
+    print("--------------------------------------------")
     return np.array(X_data), np.array(y_data)
 
 
