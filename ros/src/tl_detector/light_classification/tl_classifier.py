@@ -30,18 +30,10 @@ class TLClassifier(object):
             predictions = self.model.predict(resized_img.reshape((1, 80, 60, 3)))
             result = predictions[0].tolist().index(np.max(predictions[0]))
             traffic_light = TrafficLight()
-            if result == 0:
-                # no light
-                traffic_light.state = 4
-            if result == 1:
-                # red
-                traffic_light.state = 0
-            if result == 2:
-                # yellow
-                traffic_light.state = 1
             if result == 3: 
-                # green
-                traffic_light.state = 2
-#             traffic_light.state = result
+                # none_light
+                traffic_light.state = 4
+            else:
+                traffic_light.state = result
             rospy.loginfo("model output: %s", traffic_light.state)
         return traffic_light.state
