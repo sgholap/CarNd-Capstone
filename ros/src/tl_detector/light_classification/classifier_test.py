@@ -5,21 +5,41 @@ import datetime
 import cv2
 import glob
 
-RED_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/has_light/red/'
-YELLOW_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/has_light/yellow/'
-GREEN_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/has_light/green/'
-NONE_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/no_light/'
+# PATH_TO_GRAPH = 'model/ssd_sim/frozen_inference_graph.pb'
+# RED_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/has_light/red/'
+# YELLOW_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/has_light/yellow/'
+# GREEN_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/has_light/green/'
+# NONE_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/no_light/'
 
+
+PATH_TO_GRAPH = 'model/ssd_sim/frozen_inference_graph.pb'
+RED_IMAGE_PATH = '/home/workspace/self_dataset/site_images/red/'
+YELLOW_IMAGE_PATH = '/home/workspace/self_dataset/site_images/yellow/'
+GREEN_IMAGE_PATH = '/home/workspace/self_dataset/site_images/green/'
+NONE_IMAGE_PATH = '/home/workspace/self_dataset/site_images/none/'
 
 class ClassifierTest:
     def __init__(self, is_sim):
         self.test_data = []
         self.test_result = []
+        
+        RED_IMAGE_PATH = ''
+        YELLOW_IMAGE_PATH = ''
+        GREEN_IMAGE_PATH = ''
+        NONE_IMAGE_PATH = ''
 
         if is_sim:
             PATH_TO_GRAPH = 'model/ssd_sim/frozen_inference_graph.pb'
+            RED_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/has_light/red/'
+            YELLOW_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/has_light/yellow/'
+            GREEN_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/has_light/green/'
+            NONE_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/no_light/'
         else:
             PATH_TO_GRAPH = 'model/ssd_udacity/frozen_inference_graph.pb'
+            RED_IMAGE_PATH = '/home/workspace/self_dataset/site_images/red/'
+            YELLOW_IMAGE_PATH = '/home/workspace/self_dataset/site_images/yellow/'
+            GREEN_IMAGE_PATH = '/home/workspace/self_dataset/site_images/green/'
+            NONE_IMAGE_PATH = '/home/workspace/self_dataset/site_images/none/'
 
         self.graph = tf.Graph()
         self.threshold = .5
@@ -117,9 +137,10 @@ class ClassifierTest:
         return 3
 
 
-checker = ClassifierTest(True)
+checker = ClassifierTest(False)
 checker.initialize_test_data()
 checker.conduct_test()
 checker.show_test_result()
+
 
 
