@@ -1,17 +1,33 @@
 from styx_msgs.msg import TrafficLight
-import cv2
 import tensorflow as tf
-import rospy
 import numpy as np
+import datetime
 
 class TLClassifier(object):
-    def __init__(self):
-        #TODO load classifier
-        self.graph = tf.get_default_graph()
-        self.model = None
+    def __init__(self, is_sim):
 
-    def set_model(self, model):
-        self.model = model
+        if is_sim:
+            PATH_TO_GRAPH = r'light_classification/model/ssd_sim/frozen_inference_graph.pb'
+        else:
+            PATH_TO_GRAPH = r'light_classification/model/ssd_udacity/frozen_inference_graph.pb'
+
+        self.graph = tf.Graph()
+        self.threshold = .5
+
+        with self.graph.as_default():
+            od_graph_def = tf.GraphDef()
+            with tf.gfile.GFile(PATH_TO_GRAPH, 'rb') as fid:
+                od_graph_def.ParseFromString(fid.read())
+                tf.import_graph_def(od_graph_def, name='')
+
+            self.image_tensor = self.graph.get_tensor_by_name('image_tensor:0')
+            self.boxes = self.graph.get_tensor_by_name('detection_boxes:0')
+            self.scores = self.graph.get_tensor_by_name('detection_scores:0')
+            self.classes = self.graph.get_tensor_by_name('detection_classes:0')
+            self.num_detections = self.graph.get_tensor_by_name(
+                'num_detections:0')
+
+        self.sess = tf.Session(graph=self.graph)
 
     def get_classification(self, image):
         """Determines the color of the traffic light in the image
@@ -23,17 +39,33 @@ class TLClassifier(object):
             int: ID of traffic light color (specified in styx_msgs/TrafficLight)
 
         """
-        #TODO implement light color prediction
-        img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        resized_img = cv2.resize(img / 255., (60, 80))
+        print("call get_classification!")
         with self.graph.as_default():
-            predictions = self.model.predict(resized_img.reshape((1, 80, 60, 3)))
-            result = predictions[0].tolist().index(np.max(predictions[0]))
-            traffic_light = TrafficLight()
-            if result == 3: 
-                # none_light
-                traffic_light.state = 4
-            else:
-                traffic_light.state = result
-            rospy.loginfo("model output: %s", traffic_light.state)
-        return traffic_light.state
+            img_expand = np.expand_dims(image, axis=0)
+            start = datetime.datetime.now()
+            (boxes, scores, classes, num_detections) = self.sess.run(
+                [self.boxes, self.scores, self.classes, self.num_detections],
+                feed_dict={self.image_tensor: img_expand})
+            end = datetime.datetime.now()
+            c = end - start
+            print(c.total_seconds())
+
+        boxes = np.squeeze(boxes)
+        scores = np.squeeze(scores)
+        classes = np.squeeze(classes).astype(np.int32)
+
+        print('SCORES: ', scores[0])
+        print('CLASSES: ', classes[0])
+
+        if scores[0] > self.threshold:
+            if classes[0] == 1:
+                print('GREEN')
+                return TrafficLight.GREEN
+            elif classes[0] == 2:
+                print('RED')
+                return TrafficLight.RED
+            elif classes[0] == 3:
+                print('YELLOW')
+                return TrafficLight.YELLOW
+
+        return TrafficLight.UNKNOWN
