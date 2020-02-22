@@ -42,7 +42,7 @@ class TLDetector(object):
 
         config_string = rospy.get_param("/traffic_light_config")
         self.config = yaml.load(config_string)
-#         self.is_sim = self.config["is_sim"]
+        self.is_sim = not self.config["is_site"]
         self.is_sim = True
         print("Is Sim %d" % self.is_sim)
 
