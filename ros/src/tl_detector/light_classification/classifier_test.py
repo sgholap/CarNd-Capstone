@@ -5,14 +5,14 @@ import datetime
 import cv2
 import glob
 
-# PATH_TO_GRAPH = 'model/ssd_sim/frozen_inference_graph.pb'
+# PATH_TO_GRAPH = 'model/sim_model.pb'
 # RED_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/has_light/red/'
 # YELLOW_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/has_light/yellow/'
 # GREEN_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/has_light/green/'
 # NONE_IMAGE_PATH = '/home/workspace/self_dataset/simulator_0220_3/no_light/'
 
 
-PATH_TO_GRAPH = 'model/ssd_sim/frozen_inference_graph.pb'
+PATH_TO_GRAPH = 'model/site_model.pb'
 RED_IMAGE_PATH = '/home/workspace/self_dataset/site_images/red/'
 YELLOW_IMAGE_PATH = '/home/workspace/self_dataset/site_images/yellow/'
 GREEN_IMAGE_PATH = '/home/workspace/self_dataset/site_images/green/'
